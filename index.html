@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attack Readiness Checklist | WARNO / Broken Arrow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles inspired by Broken Arrow UI */
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: #111318;
+            color: #d0d8e8;
+            background-image: 
+                linear-gradient(rgba(17, 19, 24, 0.95), rgba(17, 19, 24, 0.95)),
+                url('https://www.brokenarrowgame.com/img/bg/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .main-container {
+            background-color: rgba(29, 32, 38, 0.85);
+            border: 1px solid #3a414d;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .title-bar {
+            background-color: rgba(10, 12, 15, 0.7);
+            border-bottom: 1px solid #3a414d;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 98% 100%, 0 100%);
+        }
+        
+        .title-text {
+            text-shadow: 0 0 8px rgba(0, 170, 255, 0.7);
+        }
+
+        .checkbox-label {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .custom-checkbox {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #3a414d;
+            background-color: #1d2026;
+            transition: all 0.2s ease;
+            position: relative;
+            top: 4px;
+        }
+
+        .custom-checkbox:checked {
+            background-color: #00aaff;
+            border-color: #00aaff;
+        }
+
+        .custom-checkbox:checked::after {
+            content: '✔';
+            position: absolute;
+            color: #111318;
+            font-size: 14px;
+            line-height: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .checkbox-label:hover .custom-checkbox {
+             border-color: #00aaff;
+        }
+
+        .btn-analyze {
+            background-color: #00aaff;
+            color: #ffffff;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            clip-path: polygon(5% 0, 100% 0, 100% 100%, 0 100%, 0 25%);
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+
+        .btn-analyze:hover {
+            background-color: #ffffff;
+            color: #00aaff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 170, 255, 0.4);
+        }
+        
+        .results-card {
+            background-color: rgba(10, 12, 15, 0.7);
+            border: 1px solid #3a414d;
+        }
+
+        /* Result text colors */
+        .text-success { color: #2ecc71; }
+        .text-warning { color: #f39c12; }
+        .text-danger { color: #e74c3c; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="main-container w-full max-w-4xl rounded-lg shadow-2xl overflow-hidden">
+        <!-- Title Bar -->
+        <div class="title-bar p-4">
+            <h1 class="title-text text-2xl md:text-3xl font-bold text-center text-blue-400">ATTACK READINESS PROTOCOL</h1>
+        </div>
+
+        <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Left Column: Unit Composition -->
+            <div class="space-y-4">
+                <h2 class="text-xl font-semibold border-b-2 border-blue-500/50 pb-2">I. UNIT COMPOSITION</h2>
+                <div class="space-y-3 pt-2">
+                    <label class="checkbox-label flex items-center text-lg">
+                        <input type="checkbox" id="infantry" class="custom-checkbox mr-3"> Sufficient Infantry
+                    </label>
+                    <label class="checkbox-label flex items-center text-lg">
+                        <input type="checkbox" id="tanks" class="custom-checkbox mr-3"> Sufficient Tanks
+                    </label>
+                    <label class="checkbox-label flex items-center text-lg">
+                        <input type="checkbox" id="transports" class="custom-checkbox mr-3"> Sufficient APC / IFV
+                    </label>
+                    <label class="checkbox-label flex items-center text-lg">
+                        <input type="checkbox" id="smoke" class="custom-checkbox mr-3"> Smoke Support
+                    </label>
+                    <label class="checkbox-label flex items-center text-lg">
+                        <input type="checkbox" id="artillery" class="custom-checkbox mr-3"> Artillery Support
+                    </label>
+                    <label class="checkbox-label flex items-center text-lg">
+                        <input type="checkbox" id="long_aa" class="custom-checkbox mr-3"> Long-Range AA
+                    </label>
+                    <label class="checkbox-label flex items-center text-lg">
+                        <input type="checkbox" id="short_aa" class="custom-checkbox mr-3"> Short-Range AA
+                    </label>
+                    <label class="checkbox-label flex items-center text-lg">
+                        <input type="checkbox" id="heli" class="custom-checkbox mr-3"> Helicopter Support
+                    </label>
+                </div>
+            </div>
+
+            <!-- Right Column: Tactical Readiness & Analysis -->
+            <div class="space-y-4">
+                <h2 class="text-xl font-semibold border-b-2 border-blue-500/50 pb-2">II. TACTICAL READINESS</h2>
+                <div class="space-y-3 pt-2">
+                    <label class="checkbox-label flex items-center text-lg">
+                        <input type="checkbox" id="scout" class="custom-checkbox mr-3"> Scouted Before Attack
+                    </label>
+                    <label class="checkbox-label flex items-center text-lg">
+                        <input type="checkbox" id="arty_prep" class="custom-checkbox mr-3"> Arty Prep on Enemy Positions
+                    </label>
+                    <label class="checkbox-label flex items-center text-lg">
+                        <input type="checkbox" id="strength" class="custom-checkbox mr-3"> Sufficient Force Ratio
+                    </label>
+                </div>
+                
+                <div class="pt-6">
+                    <button id="analyzeBtn" class="btn-analyze w-full py-3 text-lg">ANALYZE READINESS</button>
+                </div>
+
+                <div id="results" class="results-card rounded-md p-4 mt-4 hidden">
+                    <h3 id="result-title" class="text-lg font-bold mb-2"></h3>
+                    <ul id="result-list" class="list-disc list-inside space-y-1"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            const resultsDiv = document.getElementById('results');
+            const resultTitle = document.getElementById('result-title');
+            const resultList = document.getElementById('result-list');
+
+            // Configuration for each checklist item
+            const checklistItems = [
+                { id: 'infantry', text: 'Infantry forms the core of any attack to take and hold ground.', critical: true },
+                { id: 'tanks', text: 'Tanks provide essential direct fire support and breakthrough power.', critical: true },
+                { id: 'transports', text: 'APCs/IFVs are needed to get infantry to the fight and provide support.', critical: false },
+                { id: 'smoke', text: 'Smoke is crucial for screening advances and blinding enemy ATGM/tanks.', critical: true },
+                { id: 'artillery', text: 'Artillery suppresses enemy positions and counters enemy batteries.', critical: true },
+                { id: 'long_aa', text: 'Long-Range AA is required to deny enemy air superiority over the battlefield.', critical: true },
+                { id: 'short_aa', text: 'Short-Range AA protects your advancing force from helicopters and CAS.', critical: true },
+                { id: 'heli', text: 'Helicopters provide rapid fire support but are vulnerable without AA cover.', critical: false },
+                { id: 'scout', text: 'Attacking without scouting is attacking blind. Identify threats first.', critical: true },
+                { id: 'arty_prep', text: 'Pre-emptive artillery strikes soften targets and reduce casualties.', critical: true },
+                { id: 'strength', text: 'Ensure you have at least a 3:1 combat power advantage for a successful assault.', critical: true }
+            ];
+
+            analyzeBtn.addEventListener('click', () => {
+                let score = 0;
+                let totalPossibleScore = checklistItems.length;
+                const recommendations = [];
+
+                checklistItems.forEach(item => {
+                    const checkbox = document.getElementById(item.id);
+                    if (checkbox.checked) {
+                        score++;
+                    } else {
+                        // Add a recommendation if an item is unchecked
+                        recommendations.push({ text: item.text, critical: item.critical });
+                    }
+                });
+
+                const readinessPercentage = (score / totalPossibleScore) * 100;
+
+                // Clear previous results
+                resultList.innerHTML = '';
+                
+                // Populate new results
+                if (recommendations.length > 0) {
+                    recommendations.forEach(rec => {
+                        const li = document.createElement('li');
+                        li.textContent = rec.text;
+                        li.className = rec.critical ? 'text-danger' : 'text-warning';
+                        resultList.appendChild(li);
+                    });
+                } else {
+                    const li = document.createElement('li');
+                    li.textContent = 'All protocols met. Plan is solid.';
+                    li.className = 'text-success';
+                    resultList.appendChild(li);
+                }
+
+                // Set title and color based on score
+                if (readinessPercentage >= 80) {
+                    resultTitle.textContent = `ANALYSIS: GREEN (Readiness: ${readinessPercentage.toFixed(0)}%)`;
+                    resultTitle.className = 'text-lg font-bold mb-2 text-success';
+                } else if (readinessPercentage >= 50) {
+                    resultTitle.textContent = `ANALYSIS: AMBER (Readiness: ${readinessPercentage.toFixed(0)}%)`;
+                    resultTitle.className = 'text-lg font-bold mb-2 text-warning';
+                } else {
+                    resultTitle.textContent = `ANALYSIS: RED (Readiness: ${readinessPercentage.toFixed(0)}%)`;
+                    resultTitle.className = 'text-lg font-bold mb-2 text-danger';
+                }
+
+                resultsDiv.classList.remove('hidden');
+            });
+        });
+    </script>
+
+</body>
+</html>
